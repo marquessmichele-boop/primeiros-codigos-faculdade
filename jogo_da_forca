@@ -1,0 +1,45 @@
+import random  # Importação da biblioteca responsável pelo sorteio aleatório
+lista_palavras = ["gato", "cachorro", "jujuba", "limao", "minhoca", "hipermobilidade", "ursinho", "porcentagem"]# Lista de palavras disponíveis no jogo
+
+def iniciar_jogo():# Função responsável por iniciar o jogo
+    palavra_secreta = random.choice(lista_palavras)  # Sorteio da palavra secreta
+    palavra_oculta = ["_"] * len(palavra_secreta)  # Criação da palavra oculta
+    letras_tentadas = set()  # Conjunto para armazenar letras utilizadas
+    return palavra_secreta, palavra_oculta, letras_tentadas# Função responsável por processar as tentativas
+    
+def processar_tentativa(letra, palavra_secreta, palavra_oculta, letras_tentadas):
+    letras_tentadas.add(letra)  # Armazenamento da letra utilizada
+    if letra in palavra_secreta:  # Verificação da existência da letra na palavra secreta
+        for indice in range(len(palavra_secreta)): # Atualização da palavra oculta
+            if palavra_secreta[indice] == letra:
+                palavra_oculta[indice] = letra
+        return True
+    else:
+        return False
+        
+palavra_secreta, palavra_oculta, letras_tentadas = iniciar_jogo()# Inicialização do jogo
+tentativas = 6  # Número máximo de tentativas
+
+while tentativas > 0 and "_" in palavra_oculta:# Laço principal do jogo
+    print("\n===== JOGO DA FORCA =====") # Exibição da palavra oculta
+    print("Palavra:", " ".join(palavra_oculta))
+    print("Letras tentadas:", letras_tentadas)# Exibição das letras já utilizadas
+    letra = input("Digite uma letra: ").lower() # Captura da letra digitada pelo jogador
+    if letra in letras_tentadas:  # Verificação de letra repetida
+        print("Você já tentou essa letra.")
+        continue
+    acertou = processar_tentativa(letra, palavra_secreta, palavra_oculta, letras_tentadas)# Processamento da tentativa
+    if acertou: # Verificação de acerto
+        print("Letra correta.")
+    else:
+        tentativas -= 1  # Redução das tentativas restantes
+        print("Letra incorreta.")
+        print(f"Tentativas restantes: {tentativas}")
+
+if "_" not in palavra_oculta:# Verificação de vitória
+    print("\nParabéns! Você venceu.")
+    print(f"A palavra era: {palavra_secreta}")
+
+else:# Verificação de derrota
+    print("\nFim de jogo.")
+    print(f"A palavra secreta era: {palavra_secreta}")
