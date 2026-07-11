@@ -1,0 +1,91 @@
+# Lista que armazenará os estudantes
+estudantes = []
+
+# Cadastro de estudantes
+estudantes.append({
+    "nome": "Ana",
+    "notas": [8.5, 7.0, 9.2]
+})
+
+estudantes.append({
+    "nome": "Carlos",
+    "notas": [6.0, 7.5, 8.0]
+})
+
+
+def calcular_media(notas):
+    """
+    Calcula a média das notas de um estudante.
+
+    Args:
+        notas (list): Lista contendo notas numéricas do estudante.
+
+    Returns:
+        float: Média aritmética das notas informadas.
+    """
+
+    soma_notas = sum(notas)
+
+    quantidade_notas = len(notas)
+
+    media = soma_notas / quantidade_notas
+
+    return media
+
+
+def verificar_aprovacao(media, media_minima=7.0):
+    """
+    Verifica se o estudante foi aprovado com base na média final.
+
+    Args:
+        media (float): Média calculada do estudante.
+        media_minima (float): Valor mínimo necessário para aprovação.
+
+    Returns:
+        str: Retorna 'Aprovado' ou 'Reprovado'.
+    """
+
+    if media >= media_minima:
+        return "Aprovado"
+
+    else:
+        return "Reprovado"
+
+
+def gerar_relatorio(alunos):
+    """
+    Gera um relatório acadêmico com nome, notas,
+    média final e situação dos estudantes.
+
+    Args:
+        alunos (list): Lista contendo os dicionários dos estudantes.
+
+    Returns:
+        None: A função apenas exibe os dados no terminal.
+    """
+
+    print("===== RELATÓRIO DOS ESTUDANTES =====\n")
+
+    for estudante in alunos:
+
+        nome_estudante = estudante["nome"]
+
+        notas_estudante = estudante["notas"]
+
+        media_final = calcular_media(notas_estudante)
+
+        situacao_final = verificar_aprovacao(media_final)
+
+        print(f"Aluno: {nome_estudante}")
+
+        print(f"Notas: {notas_estudante}")
+
+        print(f"Média: {media_final:.2f}")
+
+        print(f"Situação: {situacao_final}")
+
+        print("-" * 30)
+
+
+# Chamada da função para gerar relatório
+gerar_relatorio(estudantes)
