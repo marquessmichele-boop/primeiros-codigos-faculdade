@@ -1,0 +1,39 @@
+estudantes = []# Lista que armazenará os estudantes
+
+estudantes.append({
+    "nome": "Ana",
+    "notas": [8.5, 7.0, 9.2]})# Cadastro de estudantes
+
+estudantes.append({
+    "nome": "Carlos",
+    "notas": [6.0, 7.5, 8.0]})
+
+for estudante in estudantes:# Exibição dos dados
+    print("Nome:", estudante["nome"])
+    print("Notas:", estudante["notas"])
+    
+def calcular_media(notas):# Função responsável por calcular a média das notas
+    soma = sum(notas)
+    quantidade = len(notas)
+    media = soma / quantidade
+    return media
+    
+def verificar_aprovacao(media, media_minima=7.0):# Função responsável por verificar aprovação
+    if media >= media_minima:
+        return "Aprovado"
+    else:
+        return "Reprovado"
+        
+print("===== RELATÓRIO DOS ESTUDANTES =====\n")
+
+for estudante in estudantes:  # Pegando informações do dicionário
+    nome = estudante["nome"]
+    notas = estudante["notas"]
+    media_final = calcular_media(notas) # Calculando média
+    situacao = verificar_aprovacao(media_final) # Verificando situação
+    print(f"Aluno: {nome}") # Exibindo resultados
+    print(f"Notas: {notas}")
+    print(f"Média: {media_final:.2f}")
+    print(f"Situação: {situacao}")
+
+    print("-" * 30)
