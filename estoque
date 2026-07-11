@@ -1,0 +1,47 @@
+estoque = {
+    "arroz": {"quantidade": 10, "preco": 25.90},
+    "feijao": {"quantidade": 5, "preco": 8.50},
+    "macarrao": {"quantidade": 8, "preco": 6.75}
+} # Estrutura inicial do estoque contendo produtos, quantidades e preços
+
+while True:# Laço principal do sistema
+    print("\n===== MENU DO ESTOQUE =====")
+    print("1 - Visualizar Estoque Atual")
+    print("2 - Registrar Entrada de Produto")
+    print("3 - Registrar Saída de Produto")
+    print("4 - Sair do Sistema")# Exibição do menu de opções
+
+    opcao = input("Escolha uma opção: ") # Captura da opção escolhida pelo usuário
+    if opcao == "1":  # Opção 1 - Visualização do estoque
+      print("\n===== ESTOQUE ATUAL =====")
+      for produto, dados in estoque.items(): # Iteração sobre os produtos armazenados
+        print(f"Produto: {produto}")
+        print(f"Quantidade: {dados['quantidade']}")
+        print(f"Preço: R$ {dados['preco']:.2f}")
+        
+    elif opcao == "2": # Opção 2 - Entrada de produtos
+      produto = input("Digite o nome do produto: ")# Captura do nome do produto
+      quantidade = int(input("Digite a quantidade: ")) # Conversão da quantidade de string para inteiro
+      preco = float(input("Digite o preço: ")) # Conversão do preço de string para float
+      if produto in estoque:# Verificação da existência do produto no estoque
+        estoque[produto]['quantidade'] += quantidade  # Atualização da quantidade do produto existente
+        print("Quantidade atualizada com sucesso.")
+      else:
+        print("Produto não encontrado.") # Tratamento de opção inválida
+        
+    elif opcao == "3":  # Opção 3 - Saída de produtos
+      produto = input("Digite o nome do produto: ")  # Captura do nome do produto
+      quantidade = int(input("Digite a quantidade de saída: "))  # Conversão da quantidade de string para inteiro
+      if produto in estoque:  # Verificação da existência do produto no estoque
+        if estoque[produto]['quantidade'] >= quantidade:  # Verificação da quantidade disponível
+         estoque[produto]['quantidade'] -= quantidade  # Atualização da quantidade após saída
+        print("Saída realizada com sucesso.")
+        
+      else:
+        print("Produto não encontrado.")  # Tratamento para produto inexistente
+    elif opcao == "4":  # Opção 4 - Encerramento do sistema
+      print("Sistema encerrado com sucesso.")  # Mensagem de despedida ao usuário
+      break  # Interrupção do loop principal
+    else:  # Tratamento de opções inválidas
+      print("Opção inválida. Tente novamente.")  # Mensagem para comando não reconhecido
+        
